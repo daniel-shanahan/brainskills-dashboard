@@ -1,7 +1,9 @@
+import PageHeader from "./components/PageHeader";
+
 export default function Home() {
   return (
     <div>
-      <h1 className="text-4xl font-bold text-center">Brainskills Dashboard</h1>
+      <PageHeader title="BrainSkills Dashboard" />
     </div>
   );
 }
