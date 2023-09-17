@@ -19,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`min-h-screen bg-gray-50 ${inter.className}`}>
         <NavMenu />
-        <main className="mx-auto pt-6 lg:pt-10">{children}</main>
+        <main className="mx-auto pt-6 lg:pt-10 bg-blue-100 rounded-lg">
+          {children}
+        </main>
       </body>
     </html>
   );
