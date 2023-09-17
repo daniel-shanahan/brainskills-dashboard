@@ -1,6 +1,6 @@
 import PageHeader from "./components/PageHeader";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <PageHeader title="BrainSkills Dashboard" />

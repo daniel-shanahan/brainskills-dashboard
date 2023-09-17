@@ -12,8 +12,7 @@ datasource db {
 }
 
 model Student {
-  id            String @id @default(cuid())
-  firstName     String
-  lastName      String
-  brainskillsId String
+  id        String @id
+  firstName String
+  lastName  String
 }
