@@ -12,7 +12,19 @@ datasource db {
 }
 
 model Student {
-  id        String @id
-  firstName String
-  lastName  String
+  id                  String               @id
+  firstName           String
+  lastName            String
+  BrainskillsSessions BrainskillsSession[]
+}
+
+model BrainskillsSession {
+  studentId        String
+  startTime        DateTime
+  rounds           Int
+  totalSeconds     Int
+  completedSeconds Int
+  student          Student  @relation(fields: [studentId], references: [id])
+
+  @@id([studentId, startTime])
 }
