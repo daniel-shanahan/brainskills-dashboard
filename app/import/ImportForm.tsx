@@ -3,22 +3,45 @@
 import Papa from "papaparse";
 
 export default function ImportForm() {
+  async function timeToSeconds(time: string) {
+    const [hours, minutes, seconds] = time.split(":");
+    return +hours * 3600 + +minutes * 60 + +seconds;
+  }
+
   async function updateData(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const studentFile = formData.get("student-file") as File;
-    //const sessionFile = formData.get("session-file") as File;
+    const sessionFile = formData.get("session-file") as File;
 
     updateStudents(studentFile);
 
-    /* Papa.parse(sessionFile, {
+    Papa.parse(sessionFile, {
       skipEmptyLines: true,
       header: true,
       complete: (results) => {
         results.data.pop();
-        console.log(results.data);
+
+        results.data.map(async (row: any) => {
+          const body = {
+            studentId: row["User ID"],
+            startTime: new Date(row["Date"]),
+            rounds: +row["Rounds"],
+            totalSeconds: await timeToSeconds(row["Total Time"]),
+            completedSeconds: await timeToSeconds(row["Completed Time"]),
+          };
+
+          // Call API to create session
+          await fetch("/api/brainskills-session", {
+            method: "PUT",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        });
       },
-    }); */
+    });
   }
 
   async function updateStudents(studentFile: File) {
