@@ -31,8 +31,6 @@ export default function ImportForm() {
             completedSeconds: await timeToSeconds(row["Completed Time"]),
           };
 
-          console.log(body);
-
           // Call API to create session
           await fetch("/api/brainskills-session", {
             method: "PUT",
