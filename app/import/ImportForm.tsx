@@ -1,6 +1,7 @@
 "use client";
 
 import Papa from "papaparse";
+import type { BrainskillsSession, Student } from "../common.types";
 
 export default function ImportForm() {
   async function timeToSeconds(time: string) {
@@ -15,7 +16,10 @@ export default function ImportForm() {
     const sessionFile = formData.get("session-file") as File;
 
     updateStudents(studentFile);
+    updateSessions(sessionFile);
+  }
 
+  function updateSessions(sessionFile: File) {
     Papa.parse(sessionFile, {
       skipEmptyLines: true,
       header: true,
@@ -23,7 +27,7 @@ export default function ImportForm() {
         results.data.pop();
 
         results.data.map(async (row: any) => {
-          const body = {
+          const body: BrainskillsSession = {
             studentId: row["User ID"],
             startTime: new Date(row["Date"]),
             rounds: +row["Rounds"],
@@ -44,13 +48,13 @@ export default function ImportForm() {
     });
   }
 
-  async function updateStudents(studentFile: File) {
+  function updateStudents(studentFile: File) {
     Papa.parse(studentFile, {
       skipEmptyLines: true,
       header: true,
       complete: (results) => {
         results.data.map(async (row: any) => {
-          const body = {
+          const body: Student = {
             firstName: row["First Name"],
             lastName: row["Last Name"],
             id: row["User ID"],

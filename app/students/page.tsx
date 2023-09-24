@@ -1,13 +1,14 @@
 import Link from "next/link";
 import PageHeader from "../components/PageHeader";
 import { prisma } from "../lib/prisma";
+import type { Student } from "../common.types";
 
 export const metadata = {
   title: "Student List",
 };
 
 export default async function StudentsPage() {
-  const students = await prisma.student.findMany();
+  const students: Student[] = await prisma.student.findMany();
 
   return (
     <>

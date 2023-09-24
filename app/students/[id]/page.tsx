@@ -1,18 +1,11 @@
 import PageHeader from "@/app/components/PageHeader";
 import { prisma } from "@/app/lib/prisma";
+import type { BrainskillsSession } from "@/app/common.types";
 
 type Props = {
   params: {
     id: string;
   };
-};
-
-type BrainskillsSession = {
-  studentId: string;
-  startTime: Date;
-  rounds: number;
-  totalSeconds: number;
-  completedSeconds: number;
 };
 
 export async function generateMetadata({ params }: Props) {
