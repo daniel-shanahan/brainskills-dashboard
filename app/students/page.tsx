@@ -1,5 +1,10 @@
+import Link from "next/link";
 import PageHeader from "../components/PageHeader";
 import { prisma } from "../lib/prisma";
+
+export const metadata = {
+  title: "Student List",
+};
 
 export default async function StudentsPage() {
   const students = await prisma.student.findMany();
@@ -9,12 +14,13 @@ export default async function StudentsPage() {
       <PageHeader title="Students" />
       <div className="flex flex-col gap-2 justify-center items-center py-10">
         {students.map((student) => (
-          <div
+          <Link
+            href={`/students/${student.id}`}
             key={student.id}
             className="w-1/2 bg-gray-50 rounded-xl py-2 px-4 shadow-sm hover:shadow-md transition duration-200 ease-in-out"
           >
             {student.firstName} {student.lastName}
-          </div>
+          </Link>
         ))}
       </div>
     </>
