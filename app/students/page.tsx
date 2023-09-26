@@ -8,7 +8,13 @@ export const metadata = {
 };
 
 export default async function StudentsPage() {
-  const students: Student[] = await prisma.student.findMany();
+  const students: Student[] = await prisma.student.findMany({
+    where: {
+      BrainskillsSessions: {
+        some: {},
+      },
+    },
+  });
 
   return (
     <>
