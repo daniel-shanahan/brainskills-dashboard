@@ -13,7 +13,7 @@ export async function SessionListItem({
 
   return (
     <div
-      className={`flex flex-row items-center justify-between gap-8 px-5 py-3 border rounded-md shadow-sm text-md text-center ${bgColor}`}
+      className={`flex flex-row items-center justify-between gap-8 px-5 py-3 rounded-md shadow-sm text-md text-center ${bgColor}`}
     >
       <div className="flex flex-col w-36">
         <p>{startTime.toDateString()}</p>
