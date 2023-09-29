@@ -11,3 +11,11 @@ export type BrainskillsSession = {
   totalSeconds: number;
   completedSeconds: number;
 };
+
+export type StudentSessionTotals = {
+  studentName: string;
+  totalSeconds: number;
+  completedSeconds: number;
+  rounds: number;
+  activePercentage: number;
+};

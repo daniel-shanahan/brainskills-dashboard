@@ -1,3 +1,9 @@
+import type {
+  BrainskillsSession,
+  StudentSessionTotals,
+  Student,
+} from "@/app/common.types";
+
 export function secondsToTime(seconds: number) {
   const hoursStr = Math.floor(seconds / 3600)
     .toString()
@@ -31,4 +37,33 @@ export function getBgColor(activePercentage: number) {
   } else {
     return "bg-red-600";
   }
+}
+
+export function computeSessionTotals(
+  student: Student,
+  sessions: BrainskillsSession[]
+) {
+  const { totalSeconds, completedSeconds, rounds } = sessions.reduce(
+    (acc, curr) => {
+      acc.totalSeconds += curr.totalSeconds;
+      acc.completedSeconds += curr.completedSeconds;
+      acc.rounds += curr.rounds;
+      return acc;
+    },
+    {
+      totalSeconds: 0,
+      completedSeconds: 0,
+      rounds: 0,
+    }
+  );
+
+  const totals: StudentSessionTotals = {
+    studentName: `${student.firstName} ${student.lastName}`,
+    totalSeconds,
+    completedSeconds,
+    rounds,
+    activePercentage: getActivePercentage(totalSeconds, completedSeconds),
+  };
+
+  return totals;
 }

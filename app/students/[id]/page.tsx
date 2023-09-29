@@ -2,7 +2,8 @@ import PageHeader from "@/app/components/PageHeader";
 import { prisma } from "@/app/lib/prisma";
 import type { BrainskillsSession } from "@/app/common.types";
 import { SessionListItem } from "./SessionListItem";
-import TotalSessions from "./TotalSessions";
+import SessionTotals from "@/app/components/SessionTotals";
+import { computeSessionTotals } from "@/app/utils";
 
 type Props = {
   params: {
@@ -43,10 +44,16 @@ export default async function StudentPage({ params }: Props) {
       },
     });
 
+  const sessionTotals = computeSessionTotals(student, studentSessions);
+
   return (
     <>
-      <PageHeader title={`${student?.firstName} ${student?.lastName}`} />
-      <TotalSessions sessions={studentSessions} />
+      <PageHeader title={`${student.firstName} ${student.lastName}`} />
+      <SessionTotals
+        totals={sessionTotals}
+        displayName={false}
+        className="mx-auto mt-10 p-5 mb-2"
+      />
       <h2 className="text-xl lg:text-3xl font-bold text-center pt-10">
         Sessions
       </h2>
