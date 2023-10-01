@@ -85,7 +85,7 @@ export default async function LeaderboardPage() {
       <ol className="flex flex-col gap-3 py-5">
         {studentSessionTotals.slice(0, 10).map((totals, index) => (
           <li
-            key={totals.studentName}
+            key={totals.student.id}
             className="flex flex-row items-center mx-auto"
           >
             <p className="text-xl font-bold w-6 mx-4 text-right">{index + 1}</p>

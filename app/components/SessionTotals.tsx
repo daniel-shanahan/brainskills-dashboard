@@ -25,7 +25,7 @@ export default async function SessionTotals({
     >
       {displayName && (
         <p className="font-semibold text-xl text-left pb-1">
-          {totals.studentName}
+          {totals.student.firstName} {totals.student.lastName}
         </p>
       )}
       <div className="flex flex-row gap-10">

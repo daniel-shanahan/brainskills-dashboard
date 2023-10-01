@@ -58,7 +58,7 @@ export function computeSessionTotals(
   );
 
   const totals: StudentSessionTotals = {
-    studentName: `${student.firstName} ${student.lastName}`,
+    student,
     totalSeconds,
     completedSeconds,
     rounds,

@@ -13,7 +13,7 @@ export type BrainskillsSession = {
 };
 
 export type StudentSessionTotals = {
-  studentName: string;
+  student: Student;
   totalSeconds: number;
   completedSeconds: number;
   rounds: number;
