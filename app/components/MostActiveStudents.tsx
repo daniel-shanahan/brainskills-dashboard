@@ -4,20 +4,20 @@ import SessionTotals from "@/app/components/SessionTotals";
 
 type Props = {
   studentSessionTotals: StudentSessionTotals[];
-  studentNumber: number;
+  rankNum: number;
 };
 
 export default async function MostActiveStudents({
   studentSessionTotals,
-  studentNumber,
+  rankNum,
 }: Props) {
   return (
-    <>
-      <h2 className="text-xl lg:text-3xl font-bold text-center mt-10">
-        {studentNumber} Most Active Students
+    <div>
+      <h2 className="text-xl lg:text-3xl font-bold text-center">
+        {rankNum} Most Active Students
       </h2>
       <ol className="flex flex-col gap-4 py-5">
-        {studentSessionTotals.slice(0, studentNumber).map((totals, index) => (
+        {studentSessionTotals.slice(0, rankNum).map((totals, index) => (
           <li key={totals.student.id} className="mx-auto">
             <Link
               href={`/students/${totals.student.id}`}
@@ -35,6 +35,6 @@ export default async function MostActiveStudents({
           </li>
         ))}
       </ol>
-    </>
+    </div>
   );
 }

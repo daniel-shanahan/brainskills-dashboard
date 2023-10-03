@@ -3,6 +3,7 @@ import type {
   StudentSessionTotals,
   Student,
 } from "@/app/common.types";
+import { prisma } from "@/app/lib/prisma";
 
 export function secondsToTime(seconds: number) {
   const hoursStr = Math.floor(seconds / 3600)
@@ -66,4 +67,60 @@ export function computeSessionTotals(
   };
 
   return totals;
+}
+
+export async function getStudentSessionTotals({
+  startDate,
+  endDate,
+}: {
+  startDate: Date;
+  endDate: Date;
+}) {
+  const students = await prisma.student.findMany({
+    where: {
+      BrainskillsSessions: {
+        some: {
+          startTime: {
+            gte: startDate,
+            lte: endDate,
+          },
+        },
+      },
+    },
+  });
+
+  const studentSessionTotals = await Promise.all(
+    students.map(async (student) => {
+      const studentSessions = await prisma.brainskillsSession.findMany({
+        where: {
+          studentId: student.id,
+          startTime: {
+            gte: startDate,
+            lte: endDate,
+          },
+        },
+      });
+
+      return computeSessionTotals(student, studentSessions);
+    })
+  );
+
+  return studentSessionTotals.sort((a, b) => {
+    if (a.activePercentage === b.activePercentage) {
+      return b.completedSeconds - a.completedSeconds;
+    }
+    return b.activePercentage - a.activePercentage;
+  });
+}
+
+export async function getMostRecentDate() {
+  return await prisma.brainskillsSession
+    .findFirst({
+      orderBy: {
+        startTime: "desc",
+      },
+    })
+    .then((session: BrainskillsSession | null) =>
+      session ? session.startTime : null
+    );
 }

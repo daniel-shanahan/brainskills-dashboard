@@ -1,64 +1,13 @@
-import { BrainskillsSession } from "@/app/common.types";
 import PageHeader from "@/app/components/PageHeader";
-import { prisma } from "@/app/lib/prisma";
-import { computeSessionTotals } from "@/app/utils";
-import MostActiveStudents from "./MostActiveStudents";
+import { getMostRecentDate, getStudentSessionTotals } from "@/app/utils";
+import MostActiveStudents from "@/app/components/MostActiveStudents";
 
 export const metadata = {
   title: "Brainskills Leaderboard",
 };
 
-async function getStudentSessionTotals({
-  startDate,
-  endDate,
-}: {
-  startDate: Date;
-  endDate: Date;
-}) {
-  const students = await prisma.student.findMany({
-    where: {
-      BrainskillsSessions: {
-        some: {
-          startTime: {
-            gte: startDate,
-            lte: endDate,
-          },
-        },
-      },
-    },
-  });
-
-  const studentSessionTotals = await Promise.all(
-    students.map(async (student) => {
-      const studentSessions = await prisma.brainskillsSession.findMany({
-        where: {
-          studentId: student.id,
-          startTime: {
-            gte: startDate,
-            lte: endDate,
-          },
-        },
-      });
-
-      return computeSessionTotals(student, studentSessions);
-    })
-  );
-
-  return studentSessionTotals.sort(
-    (a, b) => b.activePercentage - a.activePercentage
-  );
-}
-
 export default async function LeaderboardPage() {
-  const mostRecentDate = await prisma.brainskillsSession
-    .findFirst({
-      orderBy: {
-        startTime: "desc",
-      },
-    })
-    .then((session: BrainskillsSession | null) =>
-      session ? session.startTime : null
-    );
+  const mostRecentDate = await getMostRecentDate();
 
   if (!mostRecentDate) {
     return <PageHeader title="No Brainskills Sessions Found" />;
@@ -79,10 +28,12 @@ export default async function LeaderboardPage() {
       <p className="text-center mt-5 text-lg">
         {startDate.toDateString()} - {mostRecentDate.toDateString()}
       </p>
-      <MostActiveStudents
-        studentSessionTotals={studentSessionTotals}
-        studentNumber={10}
-      />
+      <div className="flex flex-row justify-center gap-10 mt-10">
+        <MostActiveStudents
+          studentSessionTotals={studentSessionTotals}
+          rankNum={10}
+        />
+      </div>
     </>
   );
 }
