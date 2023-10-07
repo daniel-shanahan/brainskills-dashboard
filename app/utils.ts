@@ -69,13 +69,7 @@ export function computeSessionTotals(
   return totals;
 }
 
-export async function getStudentSessionTotals({
-  startDate,
-  endDate,
-}: {
-  startDate: Date;
-  endDate: Date;
-}) {
+export async function getStudentSessionTotals(startDate: Date, endDate: Date) {
   const students = await prisma.student.findMany({
     where: {
       BrainskillsSessions: {
@@ -123,4 +117,36 @@ export async function getMostRecentDate() {
     .then((session: BrainskillsSession | null) =>
       session ? session.startTime : null
     );
+}
+
+export async function getStudentSessionTotalsByActiveDiff(
+  previousTotals: StudentSessionTotals[],
+  currentTotals: StudentSessionTotals[]
+) {
+  let studentsByActiveDiff: any[] = [];
+
+  currentTotals.forEach((currentTotal) => {
+    const previousTotal = previousTotals.find(
+      (total) => total.student.id === currentTotal.student.id
+    );
+
+    if (previousTotal) {
+      const activeDiff =
+        currentTotal.activePercentage - previousTotal.activePercentage;
+
+      studentsByActiveDiff.push({
+        ...currentTotal,
+        activeDiff,
+      });
+    }
+  });
+
+  studentsByActiveDiff.sort((a, b) => {
+    if (a.activeDiff === b.activeDiff) {
+      return b.completedSeconds - a.completedSeconds;
+    }
+    return b.activeDiff - a.activeDiff;
+  });
+
+  return studentsByActiveDiff;
 }

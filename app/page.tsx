@@ -1,7 +1,12 @@
 import PageHeader from "@/app/components/PageHeader";
-import { getMostRecentDate, getStudentSessionTotals } from "@/app/utils";
+import {
+  getMostRecentDate,
+  getStudentSessionTotals,
+  getStudentSessionTotalsByActiveDiff,
+} from "@/app/utils";
 import MostActiveStudents from "@/app/components/MostActiveStudents";
-import LeastActiveStudents from "./components/LeastActiveStudents";
+import LeastActiveStudents from "@/app/components/LeastActiveStudents";
+import ProgressingStudents from "@/app/components/ProgressingStudents";
 
 export const metadata = {
   title: "Brainskills Dashboard",
@@ -14,28 +19,51 @@ export default async function Home() {
     return <PageHeader title="No Brainskills Sessions Found" />;
   }
 
-  const startDate = new Date(
+  const oneMonthAgo = new Date(
     mostRecentDate.getTime() - 27 * 24 * 60 * 60 * 1000
   );
 
-  const studentSessionTotals = await getStudentSessionTotals({
-    startDate,
-    endDate: mostRecentDate,
-  });
+  const twoMonthsAgo = new Date(
+    mostRecentDate.getTime() - 54 * 24 * 60 * 60 * 1000
+  );
+
+  const currentSessionTotals = await getStudentSessionTotals(
+    oneMonthAgo,
+    mostRecentDate
+  );
+
+  const previousSessionTotals = await getStudentSessionTotals(
+    twoMonthsAgo,
+    oneMonthAgo
+  );
+
+  const studentsByActiveDiff = await getStudentSessionTotalsByActiveDiff(
+    previousSessionTotals,
+    currentSessionTotals
+  );
+
+  const progressingStudents = studentsByActiveDiff.filter(
+    (student) => student.activeDiff > 0
+  );
+
+  const regressingStudents = studentsByActiveDiff.filter(
+    (student) => student.activeDiff < -3
+  );
 
   return (
     <>
       <PageHeader title="Brainskills Dashboard" />
       <p className="text-center mt-5 text-lg">
-        {startDate.toDateString()} - {mostRecentDate.toDateString()}
+        {oneMonthAgo.toDateString()} - {mostRecentDate.toDateString()}
       </p>
       <div className="flex flex-row justify-center gap-10 mt-10">
+        <ProgressingStudents progressingStudents={progressingStudents} />
         <MostActiveStudents
-          studentSessionTotals={studentSessionTotals}
+          studentSessionTotals={currentSessionTotals}
           rankNum={10}
         />
         <LeastActiveStudents
-          studentSessionTotals={studentSessionTotals}
+          studentSessionTotals={currentSessionTotals}
           rankNum={10}
         />
       </div>
