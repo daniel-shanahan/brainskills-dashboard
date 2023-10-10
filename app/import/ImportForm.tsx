@@ -1,6 +1,7 @@
 "use client";
 
 import Papa from "papaparse";
+import toast, { Toaster } from "react-hot-toast";
 import type { BrainskillsSession, Student } from "../common.types";
 
 export default function ImportForm() {
@@ -20,6 +21,10 @@ export default function ImportForm() {
   }
 
   function updateSessions(sessionFile: File) {
+    if (sessionFile.size === 0) {
+      return;
+    }
+
     Papa.parse(sessionFile, {
       skipEmptyLines: true,
       header: true,
@@ -46,9 +51,14 @@ export default function ImportForm() {
         });
       },
     });
+    toast.success("Brainskills sessions imported!");
   }
 
   function updateStudents(studentFile: File) {
+    if (studentFile.size === 0) {
+      return;
+    }
+
     Papa.parse(studentFile, {
       skipEmptyLines: true,
       header: true,
@@ -71,6 +81,7 @@ export default function ImportForm() {
         });
       },
     });
+    toast.success("Student info imported!");
   }
 
   return (
@@ -92,6 +103,7 @@ export default function ImportForm() {
       >
         Import
       </button>
+      <Toaster position="bottom-center" />
     </form>
   );
 }
