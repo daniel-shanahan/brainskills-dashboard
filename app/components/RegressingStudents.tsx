@@ -1,31 +1,31 @@
 import Link from "next/link";
 
 type Props = {
-  progressingStudents: any[];
+  regressingStudents: any[];
 };
 
 function getBgColorDiff(diff: number) {
-  if (diff > 15) {
-    return "bg-green-500";
-  } else if (diff > 10) {
-    return "bg-green-400";
-  } else if (diff > 5) {
+  if (diff <= -15) {
+    return "bg-red-500";
+  } else if (diff <= -10) {
+    return "bg-red-400";
+  } else if (diff <= -5) {
     return "bg-green-300";
   } else {
     return "bg-green-200";
   }
 }
 
-export default async function ProgressingStudents({
-  progressingStudents,
+export default async function RegressingStudents({
+  regressingStudents,
 }: Props) {
   return (
     <div>
       <h2 className="text-xl lg:text-3xl font-bold text-center">
-        {progressingStudents.length} Progressing
+        {regressingStudents.length} Regressing
       </h2>
       <ol className="flex flex-col gap-4 py-5">
-        {progressingStudents.map((student) => (
+        {regressingStudents.map((student) => (
           <li key={student.student.id} className="mx-auto">
             <Link
               href={`/students/${student.student.id}`}
@@ -46,8 +46,8 @@ export default async function ProgressingStudents({
                     <p className="text-xl">{student.activePercentage}%</p>
                   </div>
                   <div className="flex flex-col text-xl font-semibold">
-                    <p>Increase</p>
-                    <p className="text-xl">+{student.activeDiff}%</p>
+                    <p>Decrease</p>
+                    <p className="text-xl">{student.activeDiff}%</p>
                   </div>
                 </div>
               </div>

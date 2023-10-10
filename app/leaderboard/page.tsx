@@ -17,10 +17,10 @@ export default async function LeaderboardPage() {
     mostRecentDate.getTime() - 6 * 24 * 60 * 60 * 1000
   );
 
-  const studentSessionTotals = await getStudentSessionTotals({
+  const studentSessionTotals = await getStudentSessionTotals(
     startDate,
-    endDate: mostRecentDate,
-  });
+    mostRecentDate
+  );
 
   return (
     <>

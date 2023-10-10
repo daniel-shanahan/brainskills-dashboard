@@ -7,6 +7,7 @@ import {
 import MostActiveStudents from "@/app/components/MostActiveStudents";
 import LeastActiveStudents from "@/app/components/LeastActiveStudents";
 import ProgressingStudents from "@/app/components/ProgressingStudents";
+import RegressingStudents from "./components/RegressingStudents";
 
 export const metadata = {
   title: "Brainskills Dashboard",
@@ -46,9 +47,9 @@ export default async function Home() {
     (student) => student.activeDiff > 0
   );
 
-  const regressingStudents = studentsByActiveDiff.filter(
-    (student) => student.activeDiff < -3
-  );
+  const regressingStudents = studentsByActiveDiff
+    .filter((student) => student.activeDiff < -3)
+    .reverse();
 
   return (
     <>
@@ -58,6 +59,7 @@ export default async function Home() {
       </p>
       <div className="flex flex-row justify-center gap-10 mt-10">
         <ProgressingStudents progressingStudents={progressingStudents} />
+        <RegressingStudents regressingStudents={regressingStudents} />
         <MostActiveStudents
           studentSessionTotals={currentSessionTotals}
           rankNum={10}
