@@ -3,6 +3,7 @@
 import Papa from "papaparse";
 import toast, { Toaster } from "react-hot-toast";
 import type { BrainskillsSession, Student } from "../common.types";
+import ImportFormItem from "./ImportFormItem";
 
 export default function ImportForm() {
   async function timeToSeconds(time: string) {
@@ -86,17 +87,11 @@ export default function ImportForm() {
 
   return (
     <form
-      className="flex flex-col items-center justify-center py-10"
+      className="flex flex-col items-center justify-center py-10 gap-6"
       onSubmit={updateData}
     >
-      <label className="text-xl font-semibold mb-2" htmlFor="student-file">
-        Student login list
-      </label>
-      <input className="mb-4" type="file" name="student-file" accept=".csv" />
-      <label className="text-xl font-semibold mb-2" htmlFor="session-file">
-        Exercise report
-      </label>
-      <input className="mb-4" type="file" name="session-file" accept=".csv" />
+      <ImportFormItem label="Student login list" name="student" />
+      <ImportFormItem label="Exercise report" name="session" />
       <button
         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:shadow-xl transition duration-200"
         type="submit"
