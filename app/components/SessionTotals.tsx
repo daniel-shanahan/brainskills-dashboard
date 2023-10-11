@@ -30,11 +30,11 @@ export default async function SessionTotals({
       )}
       <div className="flex flex-row gap-10">
         <div className="flex flex-col">
-          <p>Total Time</p>
+          <p>Total</p>
           <p>{totalTime}</p>
         </div>
         <div className="flex flex-col">
-          <p>Completed Time</p>
+          <p>Completed</p>
           <p>{completedTime}</p>
         </div>
         <div className="flex flex-col">

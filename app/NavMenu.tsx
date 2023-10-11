@@ -19,7 +19,7 @@ async function NavLink({
 
 export default async function NavMenu() {
   return (
-    <nav className="bg-purple-600 flex justify-between items-center px-1 lg:px-6 h-12 shadow-sm">
+    <nav className="bg-purple-600 flex justify-between items-center px-1 lg:px-6 h-12 shadow-md sticky top-0">
       <NavLink href="/">Home</NavLink>
       <ul className="flex flex-row gap-1 lg:gap-6">
         <li>

@@ -20,7 +20,7 @@ export async function SessionListItem({
         <p className="text-sm">{startTime.toLocaleTimeString()}</p>
       </div>
       <div className="flex flex-col">
-        <p>Total Time</p>
+        <p>Total</p>
         <p>{secondsToTime(totalSeconds)}</p>
       </div>
       <div className="flex flex-col">
