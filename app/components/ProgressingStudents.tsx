@@ -21,9 +21,6 @@ export default async function ProgressingStudents({
 }: Props) {
   return (
     <div>
-      <h2 className="text-xl lg:text-3xl font-bold text-center">
-        {progressingStudents.length} Progressing
-      </h2>
       <ol className="flex flex-col gap-4 py-5">
         {progressingStudents.map((student) => (
           <li key={student.student.id} className="mx-auto">

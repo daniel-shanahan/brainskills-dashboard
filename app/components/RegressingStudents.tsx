@@ -21,9 +21,6 @@ export default async function RegressingStudents({
 }: Props) {
   return (
     <div>
-      <h2 className="text-xl lg:text-3xl font-bold text-center">
-        {regressingStudents.length} Regressing
-      </h2>
       <ol className="flex flex-col gap-4 py-5">
         {regressingStudents.map((student) => (
           <li key={student.student.id} className="mx-auto">
