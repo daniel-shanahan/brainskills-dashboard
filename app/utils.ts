@@ -2,6 +2,7 @@ import type {
   BrainskillsSession,
   StudentSessionTotals,
   Student,
+  StudentSessionDiff,
 } from "@/app/common.types";
 import { prisma } from "@/app/lib/prisma";
 
@@ -127,7 +128,7 @@ export async function getStudentSessionTotalsByActiveDiff(
   endDate: Date,
   weeks: number
 ) {
-  let studentsByActiveDiff: any[] = [];
+  let studentsByActiveDiff: StudentSessionDiff[] = [];
   const startDate = weeksPriorToDate(endDate, weeks);
   const currentTotals = await getStudentSessionTotals(startDate, endDate);
   const previousTotals = await getStudentSessionTotals(

@@ -19,3 +19,12 @@ export type StudentSessionTotals = {
   rounds: number;
   activePercentage: number;
 };
+
+export type StudentSessionDiff = {
+  student: Student;
+  totalSeconds: number;
+  completedSeconds: number;
+  rounds: number;
+  activePercentage: number;
+  activeDiff: number;
+};
