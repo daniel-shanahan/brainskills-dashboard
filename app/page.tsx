@@ -1,7 +1,6 @@
 import PageHeader from "@/app/components/PageHeader";
 import {
   getMostRecentDate,
-  getStudentSessionTotals,
   getStudentSessionTotalsByActiveDiff,
 } from "@/app/utils";
 import Dashboard from "./Dashboard";
@@ -17,27 +16,9 @@ export default async function Home() {
     return <PageHeader title="No Brainskills Sessions Found" />;
   }
 
-  const oneMonthAgo = new Date(
-    mostRecentDate.getTime() - 27 * 24 * 60 * 60 * 1000
-  );
-
-  const twoMonthsAgo = new Date(
-    mostRecentDate.getTime() - 54 * 24 * 60 * 60 * 1000
-  );
-
-  const currentSessionTotals = await getStudentSessionTotals(
-    oneMonthAgo,
-    mostRecentDate
-  );
-
-  const previousSessionTotals = await getStudentSessionTotals(
-    twoMonthsAgo,
-    oneMonthAgo
-  );
-
   const studentsByActiveDiff = await getStudentSessionTotalsByActiveDiff(
-    previousSessionTotals,
-    currentSessionTotals
+    mostRecentDate,
+    4
   );
 
   const progressingStudents = studentsByActiveDiff.filter(

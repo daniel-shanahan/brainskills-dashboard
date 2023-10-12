@@ -119,11 +119,21 @@ export async function getMostRecentDate() {
     );
 }
 
+function weeksPriorToDate(date: Date, weeks: number) {
+  return new Date(date.getTime() - weeks * 7 * 24 * 60 * 60 * 1000);
+}
+
 export async function getStudentSessionTotalsByActiveDiff(
-  previousTotals: StudentSessionTotals[],
-  currentTotals: StudentSessionTotals[]
+  endDate: Date,
+  weeks: number
 ) {
   let studentsByActiveDiff: any[] = [];
+  const startDate = weeksPriorToDate(endDate, weeks);
+  const currentTotals = await getStudentSessionTotals(startDate, endDate);
+  const previousTotals = await getStudentSessionTotals(
+    weeksPriorToDate(startDate, weeks),
+    startDate
+  );
 
   currentTotals.forEach((currentTotal) => {
     const previousTotal = previousTotals.find(
