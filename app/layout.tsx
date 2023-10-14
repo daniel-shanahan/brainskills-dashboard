@@ -1,9 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import NavMenu from "./NavMenu";
-
-const inter = Inter({ subsets: ["latin"] });
+import Sidebar from "./Sidebar";
 
 export const metadata: Metadata = {
   title: "BrainSkills Dashboard",
@@ -17,11 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`min-h-screen bg-gray-300 ${inter.className}`}>
-        <NavMenu />
-        <main className="mx-auto pt-6 lg:pt-10 rounded-lg lg:w-10/12">
-          {children}
-        </main>
+      <body className="flex">
+        <Sidebar />
+        <main className="flex-grow ml-64 relative">{children}</main>
       </body>
     </html>
   );
