@@ -1,6 +1,5 @@
 import PageHeader from "@/app/components/PageHeader";
 import { getMostRecentDate } from "@/app/utils";
-import Dashboard from "./Dashboard";
 
 export const metadata = {
   title: "Brainskills Dashboard",
