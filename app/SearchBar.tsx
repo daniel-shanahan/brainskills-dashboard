@@ -8,7 +8,6 @@ export default async function SearchBar() {
           placeholder="Search for a student..."
         />
       </div>
-      <div className="flex items-center"></div>
     </nav>
   );
 }
