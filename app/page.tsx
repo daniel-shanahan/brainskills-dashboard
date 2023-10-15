@@ -1,5 +1,10 @@
 import PageHeader from "@/app/components/PageHeader";
-import { getMostRecentDate } from "@/app/utils";
+import {
+  getMostRecentDate,
+  getStudentSessionTotalsByActiveDiff,
+} from "@/app/utils";
+import BarChartPlot from "./BarChartPlot";
+import NotableChanges from "./components/NotableChanges";
 
 export const metadata = {
   title: "Brainskills Dashboard",
@@ -11,6 +16,11 @@ export default async function Home() {
   if (!mostRecentDate) {
     return <PageHeader title="No Brainskills Sessions Found" />;
   }
+
+  const studentsByActiveDiff = await getStudentSessionTotalsByActiveDiff(
+    mostRecentDate,
+    4
+  );
 
   return (
     <>
@@ -53,7 +63,9 @@ export default async function Home() {
         </div>
       </section>
       <section className="flex my-4 px-4 gap-3">
-        <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded"></div>
+        <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded">
+          <BarChartPlot studentDiffs={studentsByActiveDiff} />
+        </div>
         <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded"></div>
       </section>
       <section className="flex my-4 px-4 gap-2">
