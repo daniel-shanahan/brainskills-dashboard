@@ -2,6 +2,7 @@
 
 import Select from "react-select";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { Student } from "./common.types";
 
 type Props = {
@@ -9,9 +10,11 @@ type Props = {
 };
 
 export default function SearchBar({ students }: Props) {
+  const router = useRouter();
+
   return (
-    <nav className="flex items-center justify-between px-4 py-2">
-      <div className="flex-grow w3/4">
+    <nav className="flex items-center justify-between px-4 py-2 w-3/4">
+      <div className="flex-grow">
         <Select
           options={students.map((student) => ({
             value: student.id,
@@ -24,7 +27,7 @@ export default function SearchBar({ students }: Props) {
           classNames={{
             control: ({ isFocused }) =>
               clsx(
-                "w-3/4 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-md border",
+                "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-md border",
                 isFocused
                   ? "border-blue-500"
                   : "border-gray-50 dark:border-gray-950"
@@ -36,6 +39,10 @@ export default function SearchBar({ students }: Props) {
                 isFocused && "bg-white dark:bg-gray-800",
                 "hover:cursor-pointer px-3 py-2 rounded"
               ),
+          }}
+          onChange={(student) => {
+            if (!student) return;
+            router.push(`/students/${student?.value}`);
           }}
         />
       </div>
