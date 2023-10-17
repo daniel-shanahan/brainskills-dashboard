@@ -4,7 +4,6 @@ import {
   getStudentSessionTotalsByActiveDiff,
 } from "@/app/utils";
 import BarChartPlot from "./BarChartPlot";
-import NotableChanges from "./components/NotableChanges";
 
 export const metadata = {
   title: "Brainskills Dashboard",

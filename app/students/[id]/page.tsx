@@ -4,6 +4,7 @@ import type { BrainskillsSession } from "@/app/common.types";
 import { SessionListItem } from "./SessionListItem";
 import SessionTotals from "@/app/components/SessionTotals";
 import { computeSessionTotals } from "@/app/utils";
+import LineChartPlot from "./LineChartPlot";
 
 type Props = {
   params: {
@@ -49,12 +50,11 @@ export default async function StudentPage({ params }: Props) {
   return (
     <>
       <PageHeader title={`${student.firstName} ${student.lastName}`} />
-      <div className="flex flex-col lg:flex-row justify-between items-center">
-        <div className="flex flex-col items-center w-5/6 md:w-4/6 lg:w-5/12 lg:min-h-screen mt-10 gap-10">
-          <div className="bg-green-800 rounded-md h-56 w-full"></div>
-          <div className="bg-green-800 rounded-md h-56 w-full"></div>
+      <div className="flex my-4 px-4 gap-3">
+        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded h-[400px]">
+          <LineChartPlot studentSessions={studentSessions} />
         </div>
-        <div className="lg:w-5/12">
+        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded">
           <SessionTotals
             totals={sessionTotals}
             displayName={false}
