@@ -8,7 +8,7 @@ export default async function Sidebar() {
           <li>
             <Link
               href="/"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-950 rounded-lg dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="ml-3">Dashboard</span>
             </Link>
@@ -16,7 +16,7 @@ export default async function Sidebar() {
           <li>
             <button
               type="button"
-              className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+              className="flex items-center p-2 w-full text-base font-normal text-gray-950 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-50 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 text-left whitespace-nowrap">
                 Students
@@ -39,7 +39,7 @@ export default async function Sidebar() {
           <li>
             <Link
               href="/leaderboard"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-950 rounded-lg dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="ml-3">Leaderboard</span>
             </Link>
@@ -49,7 +49,7 @@ export default async function Sidebar() {
           <li>
             <Link
               href="/import"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
+              className="flex items-center p-2 text-base font-normal text-gray-950 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-50"
             >
               <span className="ml-3">Import Data</span>
             </Link>
