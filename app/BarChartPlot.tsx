@@ -13,12 +13,11 @@ import { StudentSessionDiff } from "./common.types";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  studentDiffs: StudentSessionDiff[];
+  data: StudentSessionDiff[];
 };
 
-export default function BarChartPlot({ studentDiffs }: Props) {
+export default function BarChartPlot({ data }: Props) {
   const router = useRouter();
-  const reversedDiffs = [...studentDiffs].reverse();
 
   const handleClick = (event: any) => {
     router.push(`/students/${event.student.id}`);
@@ -27,7 +26,7 @@ export default function BarChartPlot({ studentDiffs }: Props) {
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart width={730} height={250} data={reversedDiffs}>
+        <BarChart width={730} height={250} data={data}>
           <XAxis dataKey="student" />
           <YAxis />
           <Tooltip content={<CustomTooltip />} />

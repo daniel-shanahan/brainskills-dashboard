@@ -72,7 +72,8 @@ export function computeSessionTotals(
   return totals;
 }
 
-export async function getStudentSessionTotals(startDate: Date, endDate: Date) {
+export async function getStudentSessionTotals(endDate: Date, weeks: number) {
+  const startDate = weeksPriorToDate(endDate, weeks);
   const students = await prisma.student.findMany({
     where: {
       BrainskillsSessions: {
@@ -132,11 +133,8 @@ export async function getStudentSessionTotalsByActiveDiff(
 ) {
   let studentsByActiveDiff: StudentSessionDiff[] = [];
   const startDate = weeksPriorToDate(endDate, weeks);
-  const currentTotals = await getStudentSessionTotals(startDate, endDate);
-  const previousTotals = await getStudentSessionTotals(
-    weeksPriorToDate(startDate, weeks),
-    startDate
-  );
+  const currentTotals = await getStudentSessionTotals(endDate, weeks);
+  const previousTotals = await getStudentSessionTotals(startDate, weeks);
 
   currentTotals.forEach((currentTotal) => {
     const previousTotal = previousTotals.find(

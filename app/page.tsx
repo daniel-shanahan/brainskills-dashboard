@@ -1,6 +1,7 @@
 import PageHeader from "@/app/components/PageHeader";
 import {
   getMostRecentDate,
+  getStudentSessionTotals,
   getStudentSessionTotalsByActiveDiff,
 } from "@/app/utils";
 import BarChartPlot from "./BarChartPlot";
@@ -20,6 +21,12 @@ export default async function Home() {
     mostRecentDate,
     4
   );
+  const barChartData = [...studentsByActiveDiff].reverse();
+  const studentsByActivePercentage = await getStudentSessionTotals(
+    mostRecentDate,
+    4
+  );
+  const scatterChartData = [...studentsByActivePercentage].reverse();
 
   return (
     <>
@@ -63,7 +70,7 @@ export default async function Home() {
       </section>
       <section className="flex my-4 px-4 gap-3">
         <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded">
-          <BarChartPlot studentDiffs={studentsByActiveDiff} />
+          <BarChartPlot data={barChartData} />
         </div>
         <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded"></div>
       </section>
