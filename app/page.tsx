@@ -5,6 +5,7 @@ import {
   getStudentSessionTotalsByActiveDiff,
 } from "@/app/utils";
 import BarChartPlot from "./BarChartPlot";
+import ScatterChartPlot from "./ScatterChartPlot";
 
 export const metadata = {
   title: "Brainskills Dashboard",
@@ -72,7 +73,9 @@ export default async function Home() {
         <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded">
           <BarChartPlot data={barChartData} />
         </div>
-        <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded"></div>
+        <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded">
+          <ScatterChartPlot data={scatterChartData} />
+        </div>
       </section>
       <section className="flex my-4 px-4 gap-2">
         <div className="w-1/3 h-[250px] bg-gray-200 dark:bg-gray-700 shadow rounded"></div>
