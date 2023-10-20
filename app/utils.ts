@@ -159,5 +159,5 @@ export async function getStudentSessionTotalsByActiveDiff(
     return b.activeDiff - a.activeDiff;
   });
 
-  return studentsByActiveDiff;
+  return { studentsByActiveDiff, currentTotals, previousTotals };
 }
