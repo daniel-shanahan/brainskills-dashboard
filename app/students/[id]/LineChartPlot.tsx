@@ -35,7 +35,7 @@ export default function LineChartPlot({ studentSessions }: Props) {
 
   return (
     <>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="99%" height="99%">
         <LineChart
           width={500}
           height={300}

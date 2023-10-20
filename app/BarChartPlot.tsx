@@ -25,7 +25,7 @@ export default function BarChartPlot({ data }: Props) {
 
   return (
     <>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="99%" height="99%">
         <BarChart width={730} height={250} data={data}>
           <XAxis dataKey="student" />
           <YAxis />

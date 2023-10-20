@@ -7,6 +7,8 @@ import {
 import BarChartPlot from "./BarChartPlot";
 import ScatterChartPlot from "./ScatterChartPlot";
 
+const WEEKS = 4;
+
 export const metadata = {
   title: "Brainskills Dashboard",
 };
@@ -20,12 +22,12 @@ export default async function Home() {
 
   const studentsByActiveDiff = await getStudentSessionTotalsByActiveDiff(
     mostRecentDate,
-    4
+    WEEKS
   );
   const barChartData = [...studentsByActiveDiff].reverse();
   const studentsByActivePercentage = await getStudentSessionTotals(
     mostRecentDate,
-    4
+    WEEKS
   );
   const scatterChartData = [...studentsByActivePercentage].reverse();
 
