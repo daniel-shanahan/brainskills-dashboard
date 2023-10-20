@@ -48,7 +48,7 @@ export default function LineChartPlot({ studentSessions }: Props) {
           }}
         >
           <XAxis dataKey="dateStr" />
-          <YAxis />
+          <YAxis domain={[0, 100]} />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
           <Line dataKey="activePercentage" stroke="#8884d8" strokeWidth={2} />
