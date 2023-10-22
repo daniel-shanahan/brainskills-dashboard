@@ -50,28 +50,38 @@ export default async function StudentPage({ params }: Props) {
   return (
     <>
       <PageHeader title={`${student.firstName} ${student.lastName}`} />
-      <div className="flex my-4 px-4 gap-3">
-        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded h-[400px]">
-          <LineChartPlot studentSessions={studentSessions} />
-        </div>
-        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded">
-          <SessionTotals
-            totals={sessionTotals}
-            displayName={false}
-            className="mx-auto mt-10 p-5 mb-2"
-          />
-          <h2 className="text-xl lg:text-3xl font-bold text-center pt-10">
-            Sessions
-          </h2>
-          <div className="flex flex-col gap-3 items-center py-5">
-            {studentSessions.map((brainskillsSession) => (
-              <SessionListItem
-                key={`${brainskillsSession.startTime}`}
-                brainskillsSession={brainskillsSession}
-              />
-            ))}
+      <div className="flex m-4 gap-4">
+        <section className="space-y-3 w-1/2">
+          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded h-[300px]">
+            <LineChartPlot studentSessions={studentSessions} />
           </div>
-        </div>
+          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded h-[300px]"></div>
+        </section>
+        <section className="space-y-3 w-1/2">
+          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded py-5">
+            <h2 className="text-xl lg:text-3xl font-bold text-center pb-5">
+              Session Totals
+            </h2>
+            <SessionTotals
+              totals={sessionTotals}
+              displayName={false}
+              className="mx-auto px-5 py-3"
+            />
+          </div>
+          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded py-5">
+            <h2 className="text-xl lg:text-3xl font-bold text-center pb-5">
+              Sessions
+            </h2>
+            <div className="flex flex-col gap-3 items-center">
+              {studentSessions.map((brainskillsSession) => (
+                <SessionListItem
+                  key={`${brainskillsSession.startTime}`}
+                  brainskillsSession={brainskillsSession}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
