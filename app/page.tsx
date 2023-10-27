@@ -116,11 +116,11 @@ type DifferenceProps = {
 };
 
 function Difference({ diff }: DifferenceProps) {
-  const color = diff > 0 ? "green" : "red";
+  const textColor = diff > 0 ? "text-green-300" : "text-red-300";
   const sign = diff > 0 ? "+" : "";
 
   return (
-    <p className={`text-${color}-300`}>
+    <p className={textColor}>
       {sign}
       {diff}%
     </p>
