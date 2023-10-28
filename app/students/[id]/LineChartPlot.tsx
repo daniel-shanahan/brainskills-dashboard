@@ -5,7 +5,7 @@ import clsx from "clsx";
 import {
   getActivePercentage,
   secondsToTime,
-  getActiveColor,
+  getActiveTextColor,
 } from "@/app/utils";
 import {
   LineChart,
@@ -62,11 +62,15 @@ function CustomTooltip({ active, payload }: any) {
   if (active) {
     const sessionData = payload[0].payload;
     const { activePercentage, dateStr, totalSeconds } = sessionData;
-    const textColor = `text-${getActiveColor(activePercentage)}`;
     return (
       <div className="bg-gray-50 dark:bg-gray-800 shadow rounded p-2 space-y-3">
         <div className="flex gap-5 items-start">
-          <span className={clsx("font-semibold text-xl", textColor)}>
+          <span
+            className={clsx(
+              "font-semibold text-xl",
+              getActiveTextColor(activePercentage)
+            )}
+          >
             {activePercentage}%
           </span>
           <span>{dateStr}</span>

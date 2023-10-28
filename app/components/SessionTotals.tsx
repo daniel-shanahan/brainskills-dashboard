@@ -1,5 +1,5 @@
 import type { StudentSessionTotals } from "@/app/common.types";
-import { getActiveColor, secondsToTime } from "@/app/utils";
+import { getActiveTextColor, secondsToTime } from "@/app/utils";
 import clsx from "clsx";
 
 type Props = {
@@ -16,7 +16,6 @@ export default async function SessionTotals({
   const { totalSeconds, completedSeconds, rounds, activePercentage } = totals;
   const totalTime = secondsToTime(totalSeconds);
   const completedTime = secondsToTime(completedSeconds);
-  const textColor = `text-${getActiveColor(activePercentage)}`;
 
   return (
     <div
@@ -43,7 +42,12 @@ export default async function SessionTotals({
           <p>Rounds</p>
           <p>{rounds}</p>
         </div>
-        <div className={clsx("flex flex-col font-semibold", textColor)}>
+        <div
+          className={clsx(
+            "flex flex-col font-semibold",
+            getActiveTextColor(activePercentage)
+          )}
+        >
           <p>Active</p>
           <p className="text-xl">{activePercentage}%</p>
         </div>

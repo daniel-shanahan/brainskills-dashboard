@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { StudentSessionTotals } from "./common.types";
-import { getActiveColor, secondsToTime } from "./utils";
+import { getActiveTextColor, secondsToTime } from "./utils";
 
 type Props = {
   data: StudentSessionTotals[];
@@ -52,12 +52,13 @@ function CustomTooltip({ active, payload }: any) {
     const totals: StudentSessionTotals = payload[0].payload;
     const { completedSeconds, student, activePercentage } = totals;
     const completedTime = secondsToTime(completedSeconds);
-    const activeColor = `text-${getActiveColor(activePercentage)}`;
     return (
       <div className="bg-gray-50 dark:bg-gray-800 shadow rounded p-2">
         <p>{`${student.firstName} ${student.lastName}`}</p>
         <p className="space-x-3">
-          <span className={activeColor}>{activePercentage}%</span>
+          <span className={getActiveTextColor(activePercentage)}>
+            {activePercentage}%
+          </span>
           <span>{completedTime}</span>
         </p>
       </div>

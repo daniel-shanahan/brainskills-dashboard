@@ -1,7 +1,7 @@
 import type { BrainskillsSession } from "@/app/common.types";
 import {
   getActivePercentage,
-  getActiveColor,
+  getActiveTextColor,
   secondsToTime,
 } from "@/app/utils";
 import clsx from "clsx";
@@ -14,7 +14,6 @@ export async function SessionListItem({
   const { startTime, rounds, totalSeconds, completedSeconds } =
     brainskillsSession;
   const activePercentage = getActivePercentage(totalSeconds, completedSeconds);
-  const textColor = `text-${getActiveColor(activePercentage)}`;
 
   return (
     <div className="flex flex-row items-center justify-between gap-8 px-5 py-3 rounded-md shadow-sm text-md text-center bg-gray-50 dark:bg-gray-800">
@@ -34,7 +33,12 @@ export async function SessionListItem({
         <p>Rounds</p>
         <p>{rounds}</p>
       </div>
-      <div className={clsx("flex flex-col font-semibold", textColor)}>
+      <div
+        className={clsx(
+          "flex flex-col font-semibold",
+          getActiveTextColor(activePercentage)
+        )}
+      >
         <p>Active</p>
         <p className="text-lg">{activePercentage}%</p>
       </div>

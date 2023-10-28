@@ -27,19 +27,19 @@ export function getActivePercentage(
   return Math.round((completedSeconds / totalSeconds) * 100);
 }
 
-export function getActiveColor(activePercentage: number) {
+export function getActiveTextColor(activePercentage: number) {
   if (activePercentage >= 83) {
-    return "green-600";
+    return "text-green-600";
   } else if (activePercentage >= 78) {
-    return "green-400";
+    return "text-green-400";
   } else if (activePercentage >= 70) {
-    return "gray-50";
+    return "text-gray-50";
   } else if (activePercentage >= 60) {
-    return "yellow-400";
+    return "text-yellow-400";
   } else if (activePercentage >= 50) {
-    return "red-400";
+    return "text-red-400";
   } else {
-    return "red-600";
+    return "text-red-600";
   }
 }
 
