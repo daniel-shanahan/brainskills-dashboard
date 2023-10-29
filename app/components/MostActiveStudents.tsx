@@ -13,9 +13,7 @@ export default async function MostActiveStudents({
 }: Props) {
   return (
     <div>
-      <h2 className="text-xl lg:text-3xl font-bold text-center">
-        {rankNum} Most Active Students
-      </h2>
+      <h2 className="text-xl lg:text-3xl font-bold text-center">Most Active</h2>
       <ol className="flex flex-col gap-4 py-5">
         {studentSessionTotals.slice(0, rankNum).map((totals, index) => (
           <li key={totals.student.id} className="mx-auto">
@@ -29,7 +27,7 @@ export default async function MostActiveStudents({
               <SessionTotals
                 totals={totals}
                 displayName={true}
-                className="px-4 py-2 shadow-md hover:shadow-lg transition duration-200 ease-in-out"
+                className="px-4 py-2 shadow-lg hover:shadow-2xl transition duration-200 ease-in-out"
               />
             </Link>
           </li>
