@@ -23,10 +23,10 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang="en">
-      <body className="flex bg-gray-50 dark:bg-gray-950 text-gray-950 dark:text-gray-50">
+    <html lang="en" className="h-full">
+      <body className="flex bg-gray-50 dark:bg-gray-950 text-gray-950 dark:text-gray-50 h-full">
         <Sidebar />
-        <main className="flex-grow ml-64 relative">
+        <main className="flex-grow ml-64 relative h-full flex flex-col">
           <SearchBar students={activeStudents} />
           {children}
         </main>

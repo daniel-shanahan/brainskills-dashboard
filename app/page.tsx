@@ -61,7 +61,7 @@ export default async function Home() {
 
   return (
     <>
-      <section className="flex m-4 gap-2">
+      <section className="flex flex-none m-4 gap-2">
         <div className="flex-1 px-2 justify-center w-16 bg-gray-200 dark:bg-gray-700 shadow rounded">
           <div>
             <p className="text-gray-700 dark:text-gray-900 font-bold">
@@ -99,11 +99,11 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="flex my-4 px-4 gap-3">
-        <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded">
+      <section className="flex flex-grow mb-4 px-4 gap-3">
+        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded">
           <BarChartPlot data={barChartData} />
         </div>
-        <div className="w-1/2 h-[300px] bg-gray-200 dark:bg-gray-700 shadow rounded">
+        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded">
           <ScatterChartPlot data={scatterChartData} />
         </div>
       </section>

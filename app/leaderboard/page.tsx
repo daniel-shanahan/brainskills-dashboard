@@ -7,7 +7,6 @@ import {
 import MostActiveStudents from "@/app/components/MostActiveStudents";
 import Link from "next/link";
 import ActivePercentDiff from "../components/ActivePercentDiff";
-import SessionTotals from "../components/SessionTotals";
 
 const MIN_COMPLETED_MINUTES = 20;
 const WEEKS = 1;
