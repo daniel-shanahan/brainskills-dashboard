@@ -51,23 +51,24 @@ export default async function StudentPage({ params }: Props) {
     <>
       <PageHeader title={`${student.firstName} ${student.lastName}`} />
       <div className="flex m-4 gap-4">
-        <section className="space-y-3 w-1/2">
-          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded h-[300px]">
-            <LineChartPlot studentSessions={studentSessions} />
+        <section className="w-1/2">
+          <div className="space-y-3 sticky top-4">
+            <div className="bg-gray-200 dark:bg-gray-700 shadow rounded py-5">
+              <h2 className="text-xl lg:text-3xl font-bold text-center pb-5">
+                Session Totals
+              </h2>
+              <SessionTotals
+                totals={sessionTotals}
+                displayName={false}
+                className="mx-auto px-5 py-3"
+              />
+            </div>
+            <div className="bg-gray-200 dark:bg-gray-700 shadow rounded h-[425px] sticky top-4">
+              <LineChartPlot studentSessions={studentSessions} />
+            </div>
           </div>
-          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded h-[300px]"></div>
         </section>
         <section className="space-y-3 w-1/2">
-          <div className="bg-gray-200 dark:bg-gray-700 shadow rounded py-5">
-            <h2 className="text-xl lg:text-3xl font-bold text-center pb-5">
-              Session Totals
-            </h2>
-            <SessionTotals
-              totals={sessionTotals}
-              displayName={false}
-              className="mx-auto px-5 py-3"
-            />
-          </div>
           <div className="bg-gray-200 dark:bg-gray-700 shadow rounded py-5">
             <h2 className="text-xl lg:text-3xl font-bold text-center pb-5">
               Sessions
