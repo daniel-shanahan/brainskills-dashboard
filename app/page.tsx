@@ -100,10 +100,16 @@ export default async function Home() {
         </div>
       </section>
       <section className="flex flex-grow mb-4 px-4 gap-3">
-        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded">
+        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded p-2">
+          <p className="text-lg lg:text-xl font-semibold pb-1">
+            CHANGE IN ACTIVE %
+          </p>
           <BarChartPlot data={barChartData} />
         </div>
-        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded">
+        <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded p-2">
+          <p className="text-lg lg:text-xl font-semibold pb-1">
+            COMPLETED TIME x ACTIVE %
+          </p>
           <ScatterChartPlot data={scatterChartData} />
         </div>
       </section>
