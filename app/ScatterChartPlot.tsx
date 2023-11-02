@@ -20,22 +20,25 @@ export default function ScatterChartPlot({ data }: Props) {
     <ResponsiveContainer width="99%" height="90%">
       <ScatterChart
         margin={{
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 20,
+          top: 10,
+          right: 5,
+          bottom: 5,
         }}
       >
         <XAxis
           type="number"
           dataKey="completedSeconds"
-          label={{ value: "Completed Time", position: "bottom" }}
+          stroke="#d1d5db"
+          height={60}
+          tick={<CustomAxisTick />}
         />
         <YAxis
           type="number"
           dataKey="activePercentage"
           unit="%"
           domain={["dataMin - 5", "dataMax + 5"]}
+          stroke="#d1d5db"
+          tickMargin={5}
         />
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
@@ -44,6 +47,23 @@ export default function ScatterChartPlot({ data }: Props) {
         <Scatter name="Students" data={data} fill="#8884d8" />
       </ScatterChart>
     </ResponsiveContainer>
+  );
+}
+
+function CustomAxisTick({ x, y, payload }: any) {
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fill="#d1d5db"
+        transform="rotate(-35)"
+      >
+        {secondsToTime(payload.value)}
+      </text>
+    </g>
   );
 }
 

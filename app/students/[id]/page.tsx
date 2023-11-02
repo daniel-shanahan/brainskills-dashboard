@@ -64,7 +64,7 @@ export default async function StudentPage({ params }: Props) {
               />
             </div>
             <div className="bg-gray-200 dark:bg-gray-700 shadow rounded h-[425px] sticky top-4 p-2">
-              <p className="text-lg lg:text-xl font-semibold pb-1">
+              <p className="text-lg font-semibold pb-1 text-center">
                 ACTIVE % OVER TIME
               </p>
               <LineChartPlot studentSessions={studentSessions} />

@@ -6,8 +6,8 @@ import {
   YAxis,
   Bar,
   Tooltip,
-  Legend,
   ResponsiveContainer,
+  ReferenceLine,
 } from "recharts";
 import { StudentSessionDiff } from "./common.types";
 import { useRouter } from "next/navigation";
@@ -26,23 +26,38 @@ export default function BarChartPlot({ data }: Props) {
   return (
     <>
       <ResponsiveContainer width="99%" height="90%">
-        <BarChart width={730} height={250} data={data}>
-          <XAxis dataKey="student" />
-          <YAxis />
+        <BarChart
+          width={730}
+          height={250}
+          data={data}
+          margin={{
+            top: 10,
+            right: 5,
+            bottom: 5,
+          }}
+        >
+          <YAxis
+            unit="%"
+            interval={0}
+            stroke="#d1d5db"
+            tickFormatter={(value: number) =>
+              value > 0 ? `+${value}` : value.toString()
+            }
+            tickMargin={5}
+          />
           <Tooltip content={<CustomTooltip />} />
-          <Legend />
           <Bar
             dataKey="activeDiff"
             fill="#8884d8"
             onClick={handleClick}
             cursor="pointer"
           />
+          <ReferenceLine y={0} stroke="#d1d5db" />
         </BarChart>
       </ResponsiveContainer>
     </>
   );
 }
-
 function CustomTooltip({ active, payload }: any) {
   if (active) {
     const studentSessionDiff: StudentSessionDiff = payload[0].payload;

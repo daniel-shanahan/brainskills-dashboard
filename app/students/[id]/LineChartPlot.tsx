@@ -13,7 +13,6 @@ import {
   YAxis,
   Line,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -41,16 +40,23 @@ export default function LineChartPlot({ studentSessions }: Props) {
           height={300}
           data={data}
           margin={{
-            top: 5,
-            right: 30,
+            top: 20,
+            right: 20,
             left: 20,
-            bottom: 5,
+            bottom: 20,
           }}
         >
-          <XAxis dataKey="dateStr" />
-          <YAxis domain={[0, 100]} />
+          <XAxis
+            dataKey="dateStr"
+            stroke="#d1d5db"
+            angle={-35}
+            textAnchor="end"
+            height={60}
+            interval={"preserveStartEnd"}
+            tickMargin={5}
+          />
+          <YAxis domain={[0, 100]} stroke="#d1d5db" unit="%" tickMargin={5} />
           <Tooltip content={<CustomTooltip />} />
-          <Legend />
           <Line dataKey="activePercentage" stroke="#8884d8" strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>
