@@ -17,7 +17,7 @@ type Props = {
 
 export default function ScatterChartPlot({ data }: Props) {
   return (
-    <ResponsiveContainer width="99%" height="99%">
+    <ResponsiveContainer width="99%" height="90%">
       <ScatterChart
         margin={{
           top: 20,
