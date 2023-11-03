@@ -2,7 +2,6 @@
 
 import {
   BarChart,
-  XAxis,
   YAxis,
   Bar,
   Tooltip,

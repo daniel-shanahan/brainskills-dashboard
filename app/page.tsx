@@ -6,6 +6,7 @@ import {
 } from "@/app/utils";
 import BarChartPlot from "./BarChartPlot";
 import ScatterChartPlot from "./ScatterChartPlot";
+import clsx from "clsx";
 
 const WEEKS = 4;
 
@@ -62,42 +63,26 @@ export default async function Home() {
   return (
     <>
       <section className="flex flex-none m-4 gap-2">
-        <div className="flex-1 px-2 justify-center w-16 bg-gray-200 dark:bg-gray-700 shadow rounded">
-          <div>
-            <p className="text-gray-700 dark:text-gray-900 font-bold">
-              Total students
-            </p>
-            <p className="py-4 font-bold">{currentTotals.length}</p>
-            <Difference diff={studentDiff} />
-          </div>
-        </div>
-        <div className="flex-1 px-2 justify-center w-16 bg-gray-200 dark:bg-gray-700 shadow rounded">
-          <div>
-            <p className="text-gray-700 dark:text-gray-900 font-bold">
-              Total time
-            </p>
-            <p className="py-4 font-bold">{totalTime}</p>
-            <Difference diff={totalSecondsDiff} />
-          </div>
-        </div>
-        <div className="flex-1 px-2 justify-center w-16 bg-gray-200 dark:bg-gray-700 shadow rounded">
-          <div>
-            <p className="text-gray-700 dark:text-gray-900 font-bold">
-              Avg. time per student
-            </p>
-            <p className="py-4 font-bold">{avgTimePerStudent}</p>
-            <Difference diff={totalAvgPerStudentDiff} />
-          </div>
-        </div>
-        <div className="flex-1 px-2 justify-center w-16 bg-gray-200 dark:bg-gray-700 shadow rounded">
-          <div>
-            <p className="text-gray-700 dark:text-gray-900 font-bold">
-              Total rounds
-            </p>
-            <p className="py-4 font-bold">{totalRounds}</p>
-            <Difference diff={totalRoundsDiff} />
-          </div>
-        </div>
+        <DashboardTotal
+          title="STUDENTS"
+          value={currentTotals.length}
+          diff={studentDiff}
+        />
+        <DashboardTotal
+          title="TIME / STUDENT"
+          value={avgTimePerStudent}
+          diff={totalAvgPerStudentDiff}
+        />
+        <DashboardTotal
+          title="TIME"
+          value={totalTime}
+          diff={totalSecondsDiff}
+        />
+        <DashboardTotal
+          title="ROUNDS"
+          value={totalRounds}
+          diff={totalRoundsDiff}
+        />
       </section>
       <section className="flex flex-grow mb-4 px-4 gap-3">
         <div className="w-1/2 bg-gray-200 dark:bg-gray-700 shadow rounded p-2">
@@ -116,19 +101,30 @@ export default async function Home() {
     </>
   );
 }
-
-type DifferenceProps = {
+type DashboardTotalProps = {
+  title: string;
+  value: string | number;
   diff: number;
 };
 
-function Difference({ diff }: DifferenceProps) {
+function DashboardTotal({ title, value, diff }: DashboardTotalProps) {
   const textColor = diff > 0 ? "text-green-300" : "text-red-300";
   const sign = diff > 0 ? "+" : "";
 
   return (
-    <p className={textColor}>
-      {sign}
-      {diff}%
-    </p>
+    <div className="flex-1 px-4 py-2 justify-center w-16 bg-gray-200 dark:bg-gray-700 shadow rounded text-lg">
+      <div>
+        <p className="text-gray-700 dark:text-gray-200 font-semibold pb-1">
+          {title}
+        </p>
+        <p className="text-slate-600 dark:text-slate-300 text-2xl pb-2">
+          {value}
+        </p>
+        <p className={clsx(textColor)}>
+          {sign}
+          {diff}%
+        </p>
+      </div>
+    </div>
   );
 }
