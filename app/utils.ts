@@ -7,17 +7,19 @@ import type {
 import { prisma } from "@/app/lib/prisma";
 
 export function secondsToTime(seconds: number) {
-  const hoursStr = Math.floor(seconds / 3600)
-    .toString()
-    .padStart(2, "0");
-  const minutesStr = Math.floor((seconds % 3600) / 60)
-    .toString()
-    .padStart(2, "0");
+  if (seconds === 0) {
+    return "0";
+  }
+
+  const hoursStr = Math.floor(seconds / 3600).toString();
+  const minutesStr = Math.floor((seconds % 3600) / 60).toString();
   const secsStr = Math.floor(seconds % 60)
     .toString()
     .padStart(2, "0");
 
-  return `${hoursStr}:${minutesStr}:${secsStr}`;
+  return hoursStr === "0"
+    ? `${minutesStr}:${secsStr}`
+    : `${hoursStr}:${minutesStr.padStart(2, "0")}:${secsStr}`;
 }
 
 export function getActivePercentage(
