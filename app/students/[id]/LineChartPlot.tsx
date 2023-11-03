@@ -13,6 +13,7 @@ import {
   YAxis,
   Line,
   Tooltip,
+  CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
 
@@ -55,9 +56,16 @@ export default function LineChartPlot({ studentSessions }: Props) {
             interval={"preserveStartEnd"}
             tickMargin={5}
           />
-          <YAxis domain={[0, 100]} stroke="#d1d5db" unit="%" tickMargin={5} />
+          <YAxis
+            domain={[40, 100]}
+            stroke="#d1d5db"
+            unit="%"
+            tickMargin={5}
+            tickCount={6}
+          />
           <Tooltip content={<CustomTooltip />} />
           <Line dataKey="activePercentage" stroke="#8884d8" strokeWidth={2} />
+          <CartesianGrid stroke="#d1d5db" strokeDasharray="1 5" />
         </LineChart>
       </ResponsiveContainer>
     </>
