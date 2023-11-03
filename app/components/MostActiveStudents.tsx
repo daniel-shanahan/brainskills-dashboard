@@ -21,7 +21,7 @@ export default async function MostActiveStudents({
               href={`/students/${totals.student.id}`}
               className="flex flex-row items-center"
             >
-              <p className="text-xl font-bold w-6 mx-4 text-right">
+              <p className="text-xl font-bold w-6 mr-4 text-right">
                 {index + 1}
               </p>
               <SessionTotals

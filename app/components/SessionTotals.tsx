@@ -30,7 +30,7 @@ export default async function SessionTotals({
         </p>
       )}
       <div className="flex flex-row gap-10">
-        <div className="flex flex-col">
+        <div className="flex flex-col w-[68px]">
           <p>Total</p>
           <p>{totalTime}</p>
         </div>
